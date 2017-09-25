@@ -132,6 +132,11 @@ static void snd_rpi_hifiberry_digi_proc_registers(struct snd_info_entry *entry,
 	}
 
 	snd_iprintf(buffer, "spdrx1:   0x%02x\n", snd_soc_read(codec, WM8804_SPDRX1) );	  
+	snd_iprintf(buffer, "spdtx1:   0x%02x\n", snd_soc_read(codec, WM8804_SPDTX1) );
+	snd_iprintf(buffer, "spdtx2:   0x%02x\n", snd_soc_read(codec, WM8804_SPDTX2) );
+	snd_iprintf(buffer, "spdtx3:   0x%02x\n", snd_soc_read(codec, WM8804_SPDTX3) );
+	snd_iprintf(buffer, "spdtx4:   0x%02x\n", snd_soc_read(codec, WM8804_SPDTX4) );
+	snd_iprintf(buffer, "spdtx5:   0x%02x\n", snd_soc_read(codec, WM8804_SPDTX5) );
 
 }
 
@@ -143,6 +148,9 @@ static int snd_rpi_hifiberry_digi_init(struct snd_soc_pcm_runtime *rtd)
 
 	/* enable TX output */
 	snd_soc_update_bits(codec, WM8804_PWRDN, 0x4, 0x0);
+	
+	/* disable SCMS */
+	snd_soc_update_bits(codec, WM8804_SPDTX1, 0xff, 0x04);
 
 	/* Initialize Digi+ Pro hardware */
 	if (snd_rpi_hifiberry_is_digipro) {
