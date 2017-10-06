@@ -131,6 +131,7 @@ static void snd_rpi_hifiberry_digi_proc_registers(struct snd_info_entry *entry,
 		snd_iprintf(buffer, " org freq %s Khz\n", iec60958_3_frequencies[(temp >> 4) & 0xf]);
 	}
 
+	snd_iprintf(buffer, "intstat:  0x%02x\n", snd_soc_read(codec, WM8804_INTSTAT) );
 	snd_iprintf(buffer, "spdrx1:   0x%02x\n", snd_soc_read(codec, WM8804_SPDRX1) );	  
 	snd_iprintf(buffer, "spdtx1:   0x%02x\n", snd_soc_read(codec, WM8804_SPDTX1) );
 	snd_iprintf(buffer, "spdtx2:   0x%02x\n", snd_soc_read(codec, WM8804_SPDTX2) );
